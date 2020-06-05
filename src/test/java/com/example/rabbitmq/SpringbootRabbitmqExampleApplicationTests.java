@@ -33,7 +33,7 @@ public class SpringbootRabbitmqExampleApplicationTests {
     public void testMsgProducer(){
         
       String message=initMessage();
-      log.info("message:{}",message);
+     
       while (true){
           try {
             Thread.sleep(100);
@@ -45,7 +45,7 @@ public class SpringbootRabbitmqExampleApplicationTests {
                    msgProducer.sendFanoutTestQueue(message);
                    msgProducer.sendDirectTestQueue(message);
                    msgProducer.sendTopicTestQueue(message);
-                   
+                   log.info("message:{}",message);
                 }
             }).start();
            // log.info("thread id:{}",Thread.currentThread().getId());
