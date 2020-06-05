@@ -17,23 +17,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Log4j2
-public class SpringbootRabbitmqExampleApplicationTests {
+public class SpringbootRabbitmqExampleApplicationTest {
 
     @Autowired
     MsgProducer msgProducer;
     
-//    @Test
-//    public void testMsgConsumer(){
-//        while (true){
-//            
-//        }
-//    }
+  
     
     @Test
     public void testMsgProducer(){
         
       String message=initMessage();
-     
+      
       while (true){
           try {
             Thread.sleep(100);
@@ -45,17 +40,17 @@ public class SpringbootRabbitmqExampleApplicationTests {
                    msgProducer.sendFanoutTestQueue(message);
                    msgProducer.sendDirectTestQueue(message);
                    msgProducer.sendTopicTestQueue(message);
-                   log.info("message:{}",message);
+                   
                 }
             }).start();
-           // log.info("thread id:{}",Thread.currentThread().getId());
+            log.info("message:{}",message);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
           
       }
     }
-
+    
     public String initMessage(){
 
         String messageId = String.valueOf(UUID.randomUUID());
@@ -67,6 +62,8 @@ public class SpringbootRabbitmqExampleApplicationTests {
         map.put("createTime",createTime);
         return map.toString();
     }
+    
+    
 }
 
  
