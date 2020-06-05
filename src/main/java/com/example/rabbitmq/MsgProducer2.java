@@ -22,8 +22,8 @@ public class MsgProducer2 {
         
         CorrelationData correlationData = new CorrelationData(msg.get("messageId").toString());
         rabbitTemplate.convertAndSend(RabbitConfig.FANOUT_EXCHANGE,
-                "", msg, message -> {
-            message.getMessageProperties().setExpiration(String.valueOf(5*1000)); // 设置延迟毫秒值
+                "", msg.toString(), message -> {
+            message.getMessageProperties().setDelay(60*1000); // 设置延迟毫秒值
             return message;
         },correlationData);
  
@@ -32,8 +32,8 @@ public class MsgProducer2 {
     public void sendDirectTestQueue( Map<String,Object> msg){
         CorrelationData correlationData = new CorrelationData(msg.get("messageId").toString());
         rabbitTemplate.convertAndSend(RabbitConfig.DIRECT_EXCHANGE,
-                RabbitConfig.DIRECT_ROUTINGKEY, msg,message->{
-                    message.getMessageProperties().setExpiration(String.valueOf(5*1000));
+                RabbitConfig.DIRECT_ROUTINGKEY, msg.toString(),(message)->{
+                    message.getMessageProperties().setDelay(60*1000);
                     return message;
                 },correlationData);
     }
@@ -41,8 +41,9 @@ public class MsgProducer2 {
     public void sendTopicTestQueue(Map<String,Object> msg){
         CorrelationData correlationData = new CorrelationData(msg.get("messageId").toString());
         rabbitTemplate.convertAndSend(RabbitConfig.TOPIC_EXCHANGE,
-                RabbitConfig.TOPIC_ROUTINGKEY, msg,message->{
-                    message.getMessageProperties().setExpiration(String.valueOf(5*1000));
+                RabbitConfig.TOPIC_ROUTINGKEY, msg.toString(),message->{
+                    message.getMessageProperties().setDelay(60*1000);
+                    message.getMessageProperties().setExpiration("60000");
                     return message;
                 },correlationData);
     }

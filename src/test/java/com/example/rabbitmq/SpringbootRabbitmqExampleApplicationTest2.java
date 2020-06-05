@@ -39,8 +39,8 @@ public class SpringbootRabbitmqExampleApplicationTest2 {
                 @Override
                 public void run() {
                    
-                   msgProducer2.sendFanoutTestQueue(message);
-                   msgProducer2.sendDirectTestQueue(message);
+//                   msgProducer2.sendFanoutTestQueue(message);
+//                   msgProducer2.sendDirectTestQueue(message);
                    msgProducer2.sendTopicTestQueue(message);
                    
                 }
@@ -69,7 +69,7 @@ public class SpringbootRabbitmqExampleApplicationTest2 {
     public Map<String,Object> initMessage2(){
 
         String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
+        String messageData = "test message, hello!你哈";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Map<String,Object> map=new HashMap<>();
         map.put("messageId",messageId);

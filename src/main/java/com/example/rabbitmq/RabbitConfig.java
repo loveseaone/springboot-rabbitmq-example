@@ -5,7 +5,12 @@
 package com.example.rabbitmq;
 
 
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,7 +50,9 @@ public class RabbitConfig {
     //创建队列
     @Bean
     public Queue createTopicQueue() {
-        return new Queue(TOPIC_QUEUE_NAME);
+        Queue queue = new Queue(TOPIC_QUEUE_NAME);
+        
+        return queue ;
     }
 
     //创建交换机
@@ -61,7 +68,9 @@ public class RabbitConfig {
     
     @Bean
     TopicExchange defTopicExchange(){
-        return new TopicExchange(TOPIC_EXCHANGE);
+        
+        TopicExchange topicExchange= new TopicExchange(TOPIC_EXCHANGE);
+        return topicExchange;
     }
     
     
