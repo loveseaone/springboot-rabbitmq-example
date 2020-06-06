@@ -21,7 +21,8 @@ public class SpringbootRabbitmqExampleApplicationTest {
 
     @Autowired
     MsgProducer msgProducer;
-    
+    @Autowired
+    MsgProducer2 msgProducer2;
   
     
     @Test
@@ -31,7 +32,7 @@ public class SpringbootRabbitmqExampleApplicationTest {
       
       while (true){
           try {
-            Thread.sleep(100);
+            Thread.sleep(1);
             new Thread(new Runnable() {
                 
                 @Override
@@ -40,13 +41,36 @@ public class SpringbootRabbitmqExampleApplicationTest {
                    msgProducer.sendFanoutTestQueue(message);
                    msgProducer.sendDirectTestQueue(message);
                    msgProducer.sendTopicTestQueue(message);
-                   
+                   msgProducer2.sendTopicTestQueue(message);
                 }
             }).start();
             log.info("message:{}",message);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+          
+      }
+    }
+    
+    @Test
+    public void testMsgProducer2(){
+        
+      String message=initMessage();
+      
+      while (true){
+         
+            new Thread(new Runnable() {
+                
+                @Override
+                public void run() {
+                   
+                   msgProducer.sendFanoutTestQueue(message);
+                   msgProducer.sendDirectTestQueue(message);
+                   msgProducer.sendTopicTestQueue(message);
+                   msgProducer2.sendTopicTestQueue(message);
+                }
+            }).start();
+            log.info("message:{}",message);
           
       }
     }

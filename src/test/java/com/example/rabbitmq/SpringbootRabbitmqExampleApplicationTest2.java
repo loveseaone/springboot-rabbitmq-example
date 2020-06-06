@@ -33,7 +33,7 @@ public class SpringbootRabbitmqExampleApplicationTest2 {
 
       while (true){
           try {
-            Thread.sleep(100);
+            Thread.sleep(1);
             new Thread(new Runnable() {
                 
                 @Override

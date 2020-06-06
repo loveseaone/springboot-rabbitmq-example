@@ -24,7 +24,7 @@ public class MsgProducer2 {
                 RabbitConfig2.DELAY_KEY,
                 msg,
                 message -> {
-                    message.getMessageProperties().setDelay(6000);// 单位 毫秒
+                    message.getMessageProperties().setDelay(120000);// 单位 毫秒
                     return message;
                 });
         
