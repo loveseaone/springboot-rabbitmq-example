@@ -38,10 +38,8 @@ public class SpringbootRabbitmqExampleApplicationTest2 {
                 
                 @Override
                 public void run() {
-                   
-//                   msgProducer2.sendFanoutTestQueue(message);
-//                   msgProducer2.sendDirectTestQueue(message);
-                   msgProducer2.sendTopicTestQueue(message);
+ 
+                   msgProducer2.sendTopicTestQueue(message.toString());
                    
                 }
             }).start();
@@ -54,17 +52,7 @@ public class SpringbootRabbitmqExampleApplicationTest2 {
       }
     }
 
-    public String initMessage(){
-
-        String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
-        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Map<String,Object> map=new HashMap<>();
-        map.put("messageId",messageId);
-        map.put("messageData",messageData);
-        map.put("createTime",createTime);
-        return map.toString();
-    }
+     
     
     public Map<String,Object> initMessage2(){
 
